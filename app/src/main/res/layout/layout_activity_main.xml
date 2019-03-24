@@ -31,6 +31,15 @@
         android:layout_toEndOf="@id/button_searchGroup"
         android:text="@string/quitGroup" />
 
+
+
+    <TextView
+        android:id="@+id/tv_testForGPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_createGroup"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_deviceInfo"
         android:layout_width="match_parent"

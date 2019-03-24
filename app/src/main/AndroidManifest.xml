@@ -8,6 +8,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+
+
 
     <application
 
@@ -17,6 +24,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="agohRT34f4tWX3w9bQc7FEeVPrGrbtTD"
+            />
+
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +37,8 @@
             </intent-filter>
         </activity>
         <service android:name=".Service.NetworkService" />
+        <service android:name="com.baidu.location.f" android:enabled="true"
+            android:process=":remote"/>
     </application>
 
 </manifest>
