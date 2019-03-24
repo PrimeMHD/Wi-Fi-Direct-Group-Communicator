@@ -6,27 +6,34 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.mhd.superwifidirect.Activity.MainActivity;
 import com.mhd.superwifidirect.Bean.BroadcastObject;
 import com.mhd.superwifidirect.Bean.DeviceInfo;
 import com.mhd.superwifidirect.Bean.EventMessage_UdpToActivity;
 import com.mhd.superwifidirect.Bean.UdpDatagramParam;
+import com.mhd.superwifidirect.Task.ReceiveFileTask;
 import com.mhd.superwifidirect.Task.Task_SendUdpDatagram;
 import com.mhd.superwifidirect.Util.ByteUtil;
+import com.mhd.superwifidirect.Util.GsonUtil;
 import com.mhd.superwifidirect.Util.LocationUtils;
 import com.mhd.superwifidirect.Util.NetUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -158,7 +165,17 @@ public class NetworkService extends Service {
 
                         //通过Eventbus向Activity传送收到的数据（整理好）
 
-                        BroadcastObject broadcastObjectToSend=mGson.fromJson(ByteUtil.byteToStr(buf),BroadcastObject.class);
+
+
+                        BroadcastObject broadcastObjectToSend=null;
+//                        ???这里json的标准化需要重写
+                        try {
+                             broadcastObjectToSend=mGson.fromJson(ByteUtil.byteToStr(buf),BroadcastObject.class);
+
+                        }catch (JsonSyntaxException e){
+                            e.printStackTrace();
+                        }
+
                         if (broadcastObjectToSend!=null) {
                             EventBus.getDefault().post(new EventMessage_UdpToActivity(broadcastObjectToSend));
                         }
@@ -178,16 +195,28 @@ public class NetworkService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.e(TAG,"TCP监听线程启动");
 
 
+                try {
+                    ServerSocket serverSocket = new ServerSocket();
+                    serverSocket.setReuseAddress(true);
+                    serverSocket.bind(new InetSocketAddress(TCP_PORT));
 
+                    while (true) {
+                        Socket client = serverSocket.accept();
+                        Log.e(TAG, "客户端IP地址 : " + client.getInetAddress().getHostAddress());
+                        //启动一个任务去接收文件！
+                        ReceiveFileTask receiveFileTask = new ReceiveFileTask();
+                        receiveFileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,client);
 
+                    }
 
-
-
-
-
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
         }).start();
         //监听TCP连接
 
@@ -208,7 +237,10 @@ public class NetworkService extends Service {
             //用json发送
 
 
-            String jsonString=mGson.toJson(new BroadcastObject(MainActivity.getSelfDevice().deviceAddress,NetUtil.getSelfInetAddress(getApplicationContext()),null));
+            String jsonString=mGson.toJson(new BroadcastObject(MainActivity.getMainActivity().getSelfDevice().deviceAddress,NetUtil.getSelfInetAddress(getApplicationContext()),null));
+
+
+
 
             InetAddress broadcastAddress= null;
 //            try {
@@ -234,7 +266,7 @@ public class NetworkService extends Service {
             Log.d(TAG,"准备发送广播报文");
             //用json发送
 
-            String jsonString=mGson.toJson(new BroadcastObject(MainActivity.getSelfDevice().deviceAddress,NetUtil.getSelfInetAddress(getApplicationContext()),location));
+            String jsonString=mGson.toJson(new BroadcastObject(MainActivity.getMainActivity().getSelfDevice().deviceAddress,NetUtil.getSelfInetAddress(getApplicationContext()),location));
 
             InetAddress broadcastAddress= null;
 //            try {

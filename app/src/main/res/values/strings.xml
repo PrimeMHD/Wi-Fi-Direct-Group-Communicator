@@ -3,4 +3,19 @@
     <string name="createGroup">创建组群</string>
     <string name="searchGroup">搜索组群</string>
     <string name="quitGroup">退出组群</string>
+    <string name="sendBroadcast">发送广播</string>
+    <string name="showGroupLocation">组群定位</string>
+    <string name="dismissGroup">解散组群</string>
+    <string name="deviceName">设备名</string>
+    <string name="deviceMac">设备物理地址</string>
+    <string name="deviceState">设备状态</string>
+    <string name="tagTouchToSend">点选设备，发起通讯</string>
+    <string name="commReqList">通讯请求列表</string>
+    <string name="reqDeviceName">来信设备</string>
+    <string name="commDigest">消息摘要</string>
+    <string name="commState">通信状态</string>
+    <string name="tagDiscoverDeviceList">发现设备列表(点选通讯)</string>
+    <string name="communicate">通讯</string>
+    <integer name="wifi_file_port">45391</integer>
+    <integer name="dhcp_port">34567</integer>
 </resources>

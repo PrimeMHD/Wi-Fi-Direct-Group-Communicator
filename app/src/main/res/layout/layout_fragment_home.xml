@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <Button
+            android:id="@+id/button_createGroup"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="28dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="@drawable/ironbutton"
+            android:text="@string/createGroup" />
+        <Button
+            android:id="@+id/button_searchGroup"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignTop="@+id/button_createGroup"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ironbutton"
+            android:text="@string/searchGroup" />
+        <Button
+            android:id="@+id/button_quitGroup"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignTop="@+id/button_createGroup"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="35dp"
+            android:background="@drawable/ironbutton"
+            android:text="@string/quitGroup" />
+
+        <Button
+            android:id="@+id/button_showGroupLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ll_GroupInfo"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            android:text="@string/showGroupLocation" />
+        <!--<Button-->
+        <!--android:id="@+id/button_ChooseFunc_Trans"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toEndOf="@id/ll_GroupInfo"-->
+        <!--android:text="数据分发" />-->
+        <!--<Button-->
+        <!--android:id="@+id/button_ChooseFunc_Sign"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toEndOf="@id/button_ChooseFunc_Trans"-->
+        <!--android:layout_below="@id/button_CreateGroup"-->
+        <!--android:layout_marginStart="5dp"-->
+        <!--android:text="无纸签名"-->
+        <!--/>-->
+        <!--<Button-->
+        <!--android:id="@+id/button_ChooseFunc_OfferHelp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toEndOf="@id/ll_GroupInfo"-->
+        <!--android:layout_alignTop="@id/ll_GroupInfo"-->
+        <!--android:text="发布帮助信息" />-->
+
+        <LinearLayout
+            android:id="@+id/ll_GroupInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_quitGroup"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="120dp"
+            android:background="@drawable/cirsquare_redpad"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_GroupStateTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="组群状态："
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_GroupState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_GroupOwnerTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GROUP OWNER："
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_GroupOwner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_GroupOwnerAddrTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GroupOwner地址："
+                android:textColor="#000"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_GroupOwnerAddr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/tv_MemberNumTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成员数："
+                android:textColor="#000"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tv_MemberNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/ll_deviceList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_GroupInfo"
+            android:background="@drawable/cirsquare_redpad"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/tv_tag_discoverDeviceList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tagDiscoverDeviceList"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="@color/pureBlack"
+                />
+            <View
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f6080550"
+                android:layout_below="@id/tv_tag_discoverDeviceList"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="5dp"
+                />
+            <TextView
+                android:id="@+id/tv_tag_deviceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/deviceName"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/tv_tag_discoverDeviceList"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/tv_tag_deviceMac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/deviceMac"
+                android:layout_toEndOf="@id/tv_tag_deviceName"
+                android:layout_marginStart="60dp"
+                android:layout_below="@id/tv_tag_discoverDeviceList"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/tv_tag_deviceState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginStart="60dp"
+                android:text="@string/deviceState"
+                android:layout_toEndOf="@id/tv_tag_deviceMac"
+                android:layout_below="@id/tv_tag_discoverDeviceList"
+                android:layout_marginTop="10dp"
+                />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@id/tv_tag_discoverDeviceList"
+                android:layout_margin="10dp"
+                android:id="@+id/rv_SlaveList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_commReqList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_deviceList"
+            android:layout_margin="10dp"
+            android:background="@drawable/cirsquare_redpad"
+            >
+            <TextView
+                android:id="@+id/tv_tag_commReqList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:text="@string/commReqList"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/pureBlack"
+                />
+            <TextView
+                android:id="@+id/tv_tag_reqDeviceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/reqDeviceName"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/tv_tag_commReqList"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/tv_tag_commDigest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/commDigest"
+                android:layout_toEndOf="@id/tv_tag_reqDeviceName"
+                android:layout_marginStart="80dp"
+                android:layout_below="@id/tv_tag_commReqList"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/tv_tag_commState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginStart="60dp"
+                android:text="@string/commState"
+                android:layout_toEndOf="@id/tv_tag_commDigest"
+                android:layout_below="@id/tv_tag_commReqList"
+                android:layout_marginTop="10dp"
+                />
+
+            <View
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f6080550"
+                android:layout_below="@id/tv_tag_commReqList"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="5dp"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@id/tv_tag_commState"
+                android:layout_margin="10dp"
+                android:id="@+id/rv_CommReqList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

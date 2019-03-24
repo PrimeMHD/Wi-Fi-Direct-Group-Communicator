@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_commDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        />
+    <TextView
+        android:id="@+id/tv_commDigest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_commDevice"
+        android:layout_toEndOf="@id/tv_commDevice"
+        />
+    <TextView
+        android:id="@+id/tv_commState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_commDevice"
+        android:layout_toEndOf="@id/tv_commDigest"
+        />
+    <View
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f6080550"
+        android:layout_below="@id/tv_commDigest"
+        />
+
+</RelativeLayout>

@@ -35,6 +35,12 @@
         android:layout_height="wrap_content"
         tools:text="设备位置"
         />
+    <Button
+        android:id="@+id/button_sendTo"
+        android:text="@string/communicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <View
         android:layout_marginTop="3dp"
         android:layout_width="match_parent"

@@ -1,50 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
-
-    <TextView
-        android:id="@+id/tv_test_showDeviceList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/button_createGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/createGroup" />
-
-    <Button
-        android:id="@+id/button_searchGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/button_createGroup"
-        android:text="@string/searchGroup"
-     />
-
-    <Button
-        android:id="@+id/button_quitGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/button_searchGroup"
-        android:text="@string/quitGroup" />
-
-
-
-    <TextView
-        android:id="@+id/tv_testForGPS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/button_createGroup"
-        />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_deviceInfo"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/lay_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_height="match_parent">
 
+    </FrameLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

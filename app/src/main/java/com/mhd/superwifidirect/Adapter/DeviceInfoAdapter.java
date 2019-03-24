@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -32,11 +33,23 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
     //获得mainactivity中的这四个数据结构的引用。
 
 
+    private OnButtonListener button_clickListener;
+
+
+
+    public interface OnButtonListener{
+        void onItemClick(int positon);
+    }
+
     //TODO 这种，在类里使用new的方式创建的这个对象，会导致内存泄漏吗
     private OnClickListner clickListner;
     public interface OnClickListner{
         void onItemClick(int position);
     }
+
+
+
+
     public DeviceInfoAdapter(List<WifiP2pDevice>wifiP2pPeersList,List<WifiP2pDevice>groupDeviceList,Map<String, InetAddress>deviceIpMap,Map<String, BDLocation>deviceLocationMap){
         mWifiP2pPeersList=wifiP2pPeersList;
         mGroupDeviceList=groupDeviceList;
@@ -62,12 +75,15 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
         private TextView tv_deviceAddress;
         private TextView tv_deviceState;
         private TextView tv_deviceLocation;
+        private Button button_sendTo;
         ViewHolder(View itemView){
             super(itemView);
             tv_deviceName=(TextView)itemView.findViewById(R.id.tv_deviceName);
             tv_deviceAddress=(TextView)itemView.findViewById(R.id.tv_deviceAddress);
             tv_deviceState=(TextView)itemView.findViewById(R.id.tv_deviceDetails);
             tv_deviceLocation=(TextView)itemView.findViewById(R.id.tv_deviceLocation);
+            button_sendTo=(Button)itemView.findViewById(R.id.button_sendTo);
+
         }
 
     }
@@ -84,6 +100,15 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
                 }
             }
         });
+        view.findViewById(R.id.button_sendTo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (button_clickListener!=null){
+                    button_clickListener.onItemClick((Integer)view.getTag());
+                }
+            }
+        });
+
         return new ViewHolder(view);
     }
 
@@ -106,13 +131,25 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
 
         if(mGroupDeviceList.contains(mWifiP2pPeersList.get(position))){
             holder.tv_deviceState.setText(DeviceInfo.DeviceState.INGROUP.toString());
+
+            holder.button_sendTo.setVisibility(View.VISIBLE);
+
+
         }else if(mWifiP2pGroup!=null&&mWifiP2pGroup.getOwner().equals(mWifiP2pPeersList.get(position))){
             holder.tv_deviceState.setText(DeviceInfo.DeviceState.INGROUP.toString());
+            holder.button_sendTo.setVisibility(View.VISIBLE);
+
         }
         else {
             holder.tv_deviceState.setText(DeviceInfo.DeviceState.AVALAIBLE.toString());
+            holder.button_sendTo.setVisibility(View.INVISIBLE);
+
         }
         holder.itemView.setTag(position);
+        holder.button_sendTo.setTag(position);
+
+
+
 
 
         if(mDeviceLocationMap.containsKey(mWifiP2pPeersList.get(position).deviceAddress)){
@@ -138,6 +175,10 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
 
     public void setClickListner(OnClickListner clickListner){
         this.clickListner=clickListner;
+    }
+
+    public void setButton_clickListener(OnButtonListener button_clickListener) {
+        this.button_clickListener = button_clickListener;
     }
 
     @Override
