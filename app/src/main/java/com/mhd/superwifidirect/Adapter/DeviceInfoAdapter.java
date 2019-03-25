@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
+import com.baidu.mapapi.model.LatLng;
 import com.mhd.superwifidirect.Bean.DeviceInfo;
 import com.mhd.superwifidirect.R;
 
@@ -28,7 +29,7 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
     private List<WifiP2pDevice>mWifiP2pPeersList;//可用节点列表
     private List<WifiP2pDevice>mGroupDeviceList;//组群成员节点列表
     private Map<String, InetAddress>mDeviceIpMap;//保存组群设备的IP
-    private Map<String, BDLocation>mDeviceLocationMap;//保存组群设备的位置
+    private Map<String, LatLng>mDeviceLocationMap;//保存组群设备的位置
     private WifiP2pGroup mWifiP2pGroup;
     //获得mainactivity中的这四个数据结构的引用。
 
@@ -50,7 +51,7 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
 
 
 
-    public DeviceInfoAdapter(List<WifiP2pDevice>wifiP2pPeersList,List<WifiP2pDevice>groupDeviceList,Map<String, InetAddress>deviceIpMap,Map<String, BDLocation>deviceLocationMap){
+    public DeviceInfoAdapter(List<WifiP2pDevice>wifiP2pPeersList,List<WifiP2pDevice>groupDeviceList,Map<String, InetAddress>deviceIpMap,Map<String, LatLng>deviceLocationMap){
         mWifiP2pPeersList=wifiP2pPeersList;
         mGroupDeviceList=groupDeviceList;
         mDeviceIpMap=deviceIpMap;
@@ -154,14 +155,14 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
 
         if(mDeviceLocationMap.containsKey(mWifiP2pPeersList.get(position).deviceAddress)){
             StringBuilder stringBuilder=new StringBuilder();
-            BDLocation bdLocation=mDeviceLocationMap.get(mWifiP2pPeersList.get(position).deviceAddress);
+            LatLng bdLocation=mDeviceLocationMap.get(mWifiP2pPeersList.get(position).deviceAddress);
             if (bdLocation==null){
                 stringBuilder.append("位置未知");
             }else{
                 stringBuilder.append("经度:");
-                stringBuilder.append(bdLocation.getLongitude());
-                stringBuilder.append("纬度:");
-                stringBuilder.append(bdLocation.getLatitude());
+                stringBuilder.append(bdLocation.longitude);
+                stringBuilder.append("，  纬度:");
+                stringBuilder.append(bdLocation.latitude);
             }
 
 

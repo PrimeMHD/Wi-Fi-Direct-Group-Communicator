@@ -28,6 +28,8 @@ import com.mhd.superwifidirect.Util.UriToPathUtil;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Date;
+import java.util.Random;
 
 public class Fragment_FileDistribute extends MySupportFragment {
     private static final String TAG = "Fragment_FileDistribute";
@@ -122,7 +124,7 @@ public class Fragment_FileDistribute extends MySupportFragment {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
 
-                File outputPhoto = new File(mainActivity.getExternalCacheDir(), "output_image.jpg");
+                File outputPhoto = new File(mainActivity.getExternalCacheDir(), new Date().toString() +"output_image.jpg");
                 try {
                     if (outputPhoto.exists()) {
                         outputPhoto.delete();
@@ -144,7 +146,7 @@ public class Fragment_FileDistribute extends MySupportFragment {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
 
-                File outputVideo = new File(mainActivity.getExternalCacheDir(), "output_video.mp4");
+                File outputVideo = new File(mainActivity.getExternalCacheDir(), new Date().toString() +"output_video.mp4");
                 try {
                     if (outputVideo.exists()) {
                         outputVideo.delete();
@@ -191,7 +193,7 @@ public class Fragment_FileDistribute extends MySupportFragment {
                                 WifiP2pDevice wifiP2pDeviceToSend=mainActivity.getSendToDevice();
                                 showToast("发送文件！"+wifiP2pDeviceToSend.deviceName);
                                 InetAddress TargetInetAddress=mainActivity.getmDeviceIpMap().get(wifiP2pDeviceToSend.deviceAddress);
-                                new SendFileTask(mainActivity,fileTransfer,TargetInetAddress,TCP_PORT).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).execute();
+                                new SendFileTask(mainActivity,fileTransfer,TargetInetAddress,TCP_PORT).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
 
@@ -232,9 +234,7 @@ public class Fragment_FileDistribute extends MySupportFragment {
                                 WifiP2pDevice wifiP2pDeviceToSend=mainActivity.getSendToDevice();
                                 showToast("发送文件！"+wifiP2pDeviceToSend.deviceName);
                                 InetAddress TargetInetAddress=mainActivity.getmDeviceIpMap().get(wifiP2pDeviceToSend.deviceAddress);
-                                SendFileTask sendFileTask=new SendFileTask(mainActivity,fileTransfer,TargetInetAddress,TCP_PORT);
-                                sendFileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
+                                new SendFileTask(mainActivity,fileTransfer,TargetInetAddress,TCP_PORT).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                             } else {
                                 Log.e(TAG, "file不存在");
@@ -272,7 +272,7 @@ public class Fragment_FileDistribute extends MySupportFragment {
                                 WifiP2pDevice wifiP2pDeviceToSend=mainActivity.getSendToDevice();
                                 showToast("发送文件！"+wifiP2pDeviceToSend.deviceName);
                                 InetAddress TargetInetAddress=mainActivity.getmDeviceIpMap().get(wifiP2pDeviceToSend.deviceAddress);
-                                new SendFileTask(mainActivity,fileTransfer,TargetInetAddress,TCP_PORT).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).execute();
+                                new SendFileTask(mainActivity,fileTransfer,TargetInetAddress,TCP_PORT).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
 

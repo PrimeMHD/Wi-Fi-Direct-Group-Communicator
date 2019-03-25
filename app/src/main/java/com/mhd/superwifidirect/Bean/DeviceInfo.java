@@ -3,6 +3,8 @@ package com.mhd.superwifidirect.Bean;
 import android.location.Location;
 import android.net.wifi.p2p.WifiP2pDevice;
 
+import com.baidu.mapapi.model.LatLng;
+
 import java.net.InetAddress;
 
 public class DeviceInfo {
@@ -10,7 +12,7 @@ public class DeviceInfo {
     public  enum DeviceState{INGROUP,AVALAIBLE,LOST}
     public enum DeviceCharacter{GO,GC}
     private InetAddress deviceInetAddress;
-    private Location location;
+    private LatLng location;
     private DeviceState deviceState;
 
     public WifiP2pDevice getWifiP2pDevice() {
@@ -34,11 +36,11 @@ public class DeviceInfo {
         this.deviceInetAddress = deviceInetAddress;
     }
 
-    public Location getLocation() {
+    public LatLng getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LatLng location) {
         this.location = location;
     }
 

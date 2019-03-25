@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#4559C5</color>
+    <color name="colorPrimaryDark">#2852C7</color>
     <color name="colorAccent">#D81B60</color>
     <color name="pureBlack">#000000</color>
+    <color name="padGreen">#6D8BCE</color>
+    <color name="pureWhite">#FFFFFF</color>
+    <color name="paleRed">#F7995D</color>
+    <color name="padLightGreen">#4CAF50</color>
 </resources>

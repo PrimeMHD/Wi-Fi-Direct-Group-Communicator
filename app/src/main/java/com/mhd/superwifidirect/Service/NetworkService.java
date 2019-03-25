@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
+import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -262,7 +263,7 @@ public class NetworkService extends Service {
             return true;//这个现在还没有意义
         }
 
-        public boolean broadcastSelfIpAndLocation(BDLocation location){
+        public boolean broadcastSelfIpAndLocation(LatLng location){
             Log.d(TAG,"准备发送广播报文");
             //用json发送
 

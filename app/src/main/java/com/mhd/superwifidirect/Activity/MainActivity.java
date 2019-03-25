@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.model.LatLng;
 import com.mhd.superwifidirect.Adapter.CommunicationAdapter;
 import com.mhd.superwifidirect.Adapter.DeviceInfoAdapter;
 import com.mhd.superwifidirect.Bean.BroadcastObject;
@@ -90,7 +91,7 @@ public class MainActivity extends SupportActivity implements DirectActionListene
             Log.e(TAG, "[BDonReceiveLocation],城市为：" + location.getCity() + ",纬度为" + location.getLatitude() + ",经度为:" + location.getLongitude() + "街道为：" + location.getStreet());
             Log.e(TAG, "返回错误码:" + location.getLocType());
             if (networkServiceBinder != null) {
-                networkServiceBinder.broadcastSelfIpAndLocation(location);
+                networkServiceBinder.broadcastSelfIpAndLocation( new LatLng(location.getLatitude(), location.getLongitude()));
             }
         }
 
@@ -104,13 +105,11 @@ public class MainActivity extends SupportActivity implements DirectActionListene
     private List<WifiP2pDevice> mWifiP2pPeersList = new ArrayList<>();//可用节点列表
     private List<WifiP2pDevice> mGroupDeviceList = new ArrayList<>();//组群成员节点列表
     private Map<String, InetAddress> mDeviceIpMap = new HashMap<>();//保存组群设备的IP
-    private Map<String, BDLocation> mDeviceLocationMap = new HashMap<>();//保存组群设备的位置
+    private Map<String, LatLng> mDeviceLocationMap = new HashMap<>();//保存组群设备的位置
     private DeviceInfoAdapter deviceInfoAdapter;
     private CommunicationAdapter communicationAdapter;
     private List<ReceivedTransInfo> receivedFilePath=new ArrayList<>();
 
-
-    private Location selfLocation;
     private static MainActivity mainActivity;
     private WifiP2pDevice sendToDevice;
 
@@ -275,7 +274,7 @@ public class MainActivity extends SupportActivity implements DirectActionListene
         LocationClientOption option = new LocationClientOption();
         option.setScanSpan(1200);
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        option.setCoorType("bd0911");
+        option.setCoorType("bd09ll");
         option.setOpenGps(true);
         option.setIgnoreKillProcess(true);
         option.setLocationNotify(true);
@@ -400,7 +399,7 @@ public class MainActivity extends SupportActivity implements DirectActionListene
         BroadcastObject broadcastObject = eventMessage_udpToActivity.getBroadcastObject();
         String deviceMac = broadcastObject.getSelfMac();
         InetAddress inetAddress = broadcastObject.getInetAddress();
-        BDLocation location = broadcastObject.getLocation();
+        LatLng location = broadcastObject.getLocation();
         mDeviceIpMap.put(deviceMac, inetAddress);
         mDeviceLocationMap.put(deviceMac, location);
         EventBus.getDefault().post(new EventMessage_MAtoFragmentGroupMap(true));
@@ -699,7 +698,7 @@ public class MainActivity extends SupportActivity implements DirectActionListene
         return mDeviceIpMap;
     }
 
-    public Map<String, BDLocation> getmDeviceLocationMap() {
+    public Map<String, LatLng> getmDeviceLocationMap() {
         return mDeviceLocationMap;
     }
 
@@ -735,6 +734,8 @@ public class MainActivity extends SupportActivity implements DirectActionListene
                 return wifiP2pDevice.deviceName;
             }
         }
+        if (mac.equals(getSelfDevice().deviceAddress))
+            return getSelfDevice().deviceName;
         return null;
     }
 }

@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class Fragment_GroupMap extends MySupportFragment {
     private static final String TAG = "Fragment_GroupMap";
-    private Map<String, BDLocation> deviceLocationMap;
+    private Map<String, LatLng> deviceLocationMap;
 
     private MapView mMapView = null;
     private BaiduMap baiduMap;
@@ -86,7 +86,7 @@ public class Fragment_GroupMap extends MySupportFragment {
         if (isFirstLocate) {
             Log.d(TAG,"跳到了我这里");
             String selfMac = MainActivity.getMainActivity().getSelfDevice().deviceAddress;
-            BDLocation selfLocation = mainActivity.getmDeviceLocationMap().get(selfMac);
+            LatLng selfLocation = mainActivity.getmDeviceLocationMap().get(selfMac);
             if (selfLocation != null) {
                 jumeToLocation(selfLocation);
                 isFirstLocate = false;
@@ -94,9 +94,9 @@ public class Fragment_GroupMap extends MySupportFragment {
         }
     }
 
-    private void jumeToLocation(BDLocation bdLocation) {
+    private void jumeToLocation(LatLng bdLocation) {
 
-        LatLng ll = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
+        LatLng ll = bdLocation;
         MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
         baiduMap.animateMapStatus(update);
         update = MapStatusUpdateFactory.zoomTo(16f);
@@ -118,16 +118,16 @@ public class Fragment_GroupMap extends MySupportFragment {
 
         Iterator iter = deviceLocationMap.entrySet().iterator();
         while (iter.hasNext()) {
-            Map.Entry<String, BDLocation> entry = (Map.Entry) iter.next();
+            Map.Entry<String, LatLng> entry = (Map.Entry) iter.next();
             String deviceMac = entry.getKey();
-            BDLocation bdLocation = entry.getValue();
+            LatLng bdLocation = entry.getValue();
 
             //////////////////////获取地理点
-            LatLng point = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
+            LatLng point = bdLocation;
 
             tv_deviceName.setText(mainActivity.getDeviceNameByMac(deviceMac));
-            tv_deviceLat.setText(String.valueOf(bdLocation.getLatitude()));
-            tv_deviceLng.setText(String.valueOf(bdLocation.getLongitude()));
+            tv_deviceLat.setText(String.valueOf(bdLocation.latitude));
+            tv_deviceLng.setText(String.valueOf(bdLocation.longitude));
             BitmapDescriptor bd1 = BitmapDescriptorFactory.fromBitmap(getBitmapFromView(view));
             MarkerOptions ooA = new MarkerOptions().position(point).icon(bd1).zIndex(9).draggable(true);
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,44 +7,61 @@
     android:focusable="true"
     android:orientation="vertical"
     android:padding="6dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/cirsquare_solidpad"
     tools:context="com.mhd.superwifidirect.Activity.MainActivity">
 
 
     <TextView
+        android:textColor="@color/pureWhite"
         android:id="@+id/tv_deviceName"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:layout_alignParentStart="true"
         tools:text="Android N" />
 
     <TextView
         android:id="@+id/tv_deviceAddress"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:layout_alignBaseline="@id/tv_deviceName"
+        android:layout_toEndOf="@id/tv_deviceName"
+        android:textColor="@color/pureWhite"
         tools:text="192.168.0.1" />
 
     <TextView
         android:id="@+id/tv_deviceDetails"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_deviceName"
+        android:layout_toEndOf="@id/tv_deviceAddress"
+        android:textColor="@color/pureWhite"
         tools:text="可用的" />
     <TextView
         android:id="@+id/tv_deviceLocation"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_deviceName"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/pureWhite"
         tools:text="设备位置"
         />
     <Button
         android:id="@+id/button_sendTo"
+        android:layout_below="@id/tv_deviceLocation"
+        android:layout_marginTop="5dp"
         android:text="@string/communicate"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         />
     <View
-        android:layout_marginTop="3dp"
+        android:layout_below="@id/button_sendTo"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#f6080550"
+        android:background="@color/pureWhite"
+        android:layout_marginBottom="10dp"
         />
-</LinearLayout>
+</RelativeLayout>
